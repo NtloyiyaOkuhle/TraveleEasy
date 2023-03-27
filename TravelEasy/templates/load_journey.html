@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Load Journeys onto Card</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #333333;
+        font-size: 36px;
+        text-align: center;
+        margin-top: 50px;
+      }
+      p {
+        color: #333333;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 30px;
+      }
+      form {
+        text-align: center;
+        margin-top: 50px;
+      }
+      label {
+        font-size: 20px;
+        color: #333333;
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="submit"] {
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        width: 300px;
+      }
+      input[type="submit"] {
+        background-color: #007bff;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #0062cc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Load Journeys onto Card</h1>
+    <p>Please enter your card details and the number of journeys you want to load:</p>
+    <form method="POST">
+      <label for="card_number">Card Number:</label>
+      <input type="text" id="card_number" name="card_number"><br><br>
+      <label for="journeys">Number of Journeys:</label>
+      <input type="number" id="journeys" name="journeys"><br><br>
+      <input type="submit" value="Load Journeys">
+    </form>
+  </body>
+</html>

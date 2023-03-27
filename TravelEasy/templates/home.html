@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taxi Payment System</title>
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font-family: Arial, sans-serif;
+      }
+      
+      .welcome {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+      
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      
+      li {
+        margin: 0 10px;
+      }
+      
+      a {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #000;
+        text-decoration: none;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        transition: background-color 0.2s ease;
+      }
+      
+      a:hover {
+        background-color: #333;
+        color: #fff;
+      }
+      
+      @media only screen and (max-width: 600px) {
+        .welcome {
+          font-size: 2rem;
+        }
+        
+        a {
+          padding: 5px 10px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="welcome">Welcome to TravelEasy.</h1>
+    <ul>
+      <li><a href="/load_journey">Load Journeys onto Card</a></li>
+      <li><a href="/pay_cash">Pay with Cash</a></li>
+    </ul>
+  </body>
+</html>

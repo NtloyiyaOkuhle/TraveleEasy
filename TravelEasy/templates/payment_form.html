@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Form</title>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <h1>Payment Form</h1>
+    <p>Please enter your card details:</p>
+    <form method="POST" id="payment-form">
+      <div class="form-group">
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="card_holder_name">Cardholder Name:</label>
+        <input type="text" id="card_holder_name" name="card_holder_name" class="form-control" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="expiry_month">Expiry Month:</label>
+          <input type="number" id="expiry_month" name="expiry_month" class="form-control" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="expiry_year">Expiry Year:</label>
+          <input type="number" id="expiry_year" name="expiry_year" class="form-control" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input type="number" id="cvv" name="cvv" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="currency">Currency:</label>
+        <select id="currency" name="currency" class="form-control" required>
+          <option value="usd">USD</option>
+          <option value="eur">EUR</option>
+          <option value="gbp">GBP</option>
+          <option value="zar">ZAR</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+
+    <script>
+      var stripe = Stripe('pk_test_12345'); // Replace with your Stripe public key
+      var elements = stripe.elements();
+      var card = elements.create('card', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+          }
+        }
+      });
+      card.mount('#card-element');
+	  
+	  // Handle form submission
+	  var form = document.getElementById('payment-form');
+	  form.addEventListener('submit', function(event) {
+		event.preventDefault();
+		stripe.createToken(card).then(function(result) {
+		  if (result.error) {
+			// Inform the user if there was an error
+			var errorElement = document.getElementById('card-errors');
+			errorElement.textContent = result.error.message;
+		  } else {
+			// Send the token to your server
+			stripeTokenHandler(result.token);
+		  }
+		});
+	  });
+
+	  // Send the token to your server
+	  function stripeTokenHandler(token) {
+		var form = document.getElementById('payment-form');
+		var hiddenInput = document.createElement('input');
+		hiddenInput.setAttribute('type', 'hidden');
+		hiddenInput.setAttribute('name', 'stripeToken');
+		hiddenInput.setAttribute('value', token.id);
+		form.appendChild(hiddenInput);
+		form.submit();
+	  }
+	</script>
+  </body>
+</html>
